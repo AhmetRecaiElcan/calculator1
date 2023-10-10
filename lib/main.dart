@@ -19,8 +19,7 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-  String _display =
-      ''; // Hesaplama sonucunu ve girilen sayıları görüntülemek için kullanılır
+  String _display = '';
   double _num1 = 0;
   double _num2 = 0;
   String _operator = '';
