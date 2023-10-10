@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,10 +29,10 @@ class _CalculatorState extends State<Calculator> {
   void _onButtonPressed(String text) {
     if (text == 'C') {
       _clear();
-    } else if (text == '=') {
-      _calculate();
     } else if (text == '+' || text == '-' || text == '*' || text == '/') {
       _setOperator(text);
+    } else if (text == '=') {
+      _calculate();
     } else {
       _appendToDisplay(text);
     }
@@ -42,9 +44,9 @@ class _CalculatorState extends State<Calculator> {
     });
   }
 
-  void _setOperator(String operator) {
+  void _setOperator(String Operator) {
     setState(() {
-      _operator = operator;
+      _operator = Operator;
       _num1 = double.parse(_display);
       _display = '';
     });
