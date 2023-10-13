@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -54,23 +55,22 @@ class _CalculatorState extends State<Calculator> {
 
   void _calculate() {
     double result = 0;
-    double num2 = double.parse(_display);
+    double _num2 = double.parse(_display);
 
     switch (_operator) {
       case '+':
-        result = _num1 + num2;
+        result = _num1 + _num2;
         break;
       case '-':
-        result = _num1 - num2;
+        result = _num1 - _num2;
         break;
       case '*':
-        result = _num1 * num2;
+        result = _num1 * _num2;
         break;
       case '/':
-        result = _num1 / num2;
+        result = _num1 / _num2;
         break;
     }
-
     setState(() {
       _display = result.toString();
     });

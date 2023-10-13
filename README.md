@@ -24,7 +24,7 @@ widgetimizei güncellmek için Calculator widgetini state ile durumunu oluşturd
  gösterirken _ ile gösterdik private olup sadece biz güncelleyebilelim
 => = return demek.
 
-
+-----------------------------------------------------------------------PART-2-------------------------------------------------------
 21-26 araasındaki kod satırları : 
 <  > = State sınıflarını belirtmek için kullanırız...
 ilk satırda aynı şeyleri yaptık yine classımızı miras aldık sonra onun durumunu değiştirdik ondan sonra boş bir ifadeyle başlatmak için " koyduk bu stringin boş olduğunu ifade eder 
@@ -47,3 +47,16 @@ yazdır olan _displayı alıp sayıya ekliyoruz yani aslında ilk sayı tamamlan
 47-53 arasındaki kod satırları:
 _parse = dönütürme texti sayıya döndürme gibi...
 bizim aslında burda yaptığımız _SetOperator kodunun davranışını yazmak _SetOperator bizim kodumuzdane yapyor opearerü koaymak o yüzden bunu koda dökücez buda statefulwidget olduğu için setState kullanmakk zorundayız setState in içine ilk olarak kullanıcıdan aldığımız operatörü kendi private operatörümüze eşitliyoruz ardından _num1 imizi de burda double.parse sayesinde ondalık sayya çeviriyurz ardından yazdırla _num1 e eşitliyoruz...Bir sonraki satırda ise yeni bir _display belirleyip '' çünkü ilk sayı ve operatör bitti.....
+
+
+56-73 aralığındaki kod satırları :
+switch = bir değişkeni farklı durumlarda ele almamıza sebep olur...
+case = kesinse ifade eder...
+double = veri türü, ondalık sayıları temsil etmek ve bu sayılar üzerinde matematiksel işlemler yapmak için kullanılan önemli bir veri türüdür.
+
+
+kısacası part 2 de yapılanlar :
+1-) _CalculatorState in boşluk  0 larını belirt.
+2-) butona basılcığına neler olucağını yaz. yazma sırası : _celar , _setOperator , _calculate , _appendToDisplay
+3-) butona basıldığında olucakları teker teker tanımla. tanımlama sırası _appendToDisplay , _setOperator, _calculate...
+4-) 0 lama işlemlerini yaz sonra onları tanımla
