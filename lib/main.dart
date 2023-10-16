@@ -89,7 +89,7 @@ class _CalculatorState extends State<Calculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hesap Makinesi'),
+        title: Text('Yilmaz edis'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

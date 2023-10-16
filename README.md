@@ -60,3 +60,26 @@ kısacası part 2 de yapılanlar :
 2-) butona basılcığına neler olucağını yaz. yazma sırası : _celar , _setOperator , _calculate , _appendToDisplay
 3-) butona basıldığında olucakları teker teker tanımla. tanımlama sırası _appendToDisplay , _setOperator, _calculate...
 4-) 0 lama işlemlerini yaz sonra onları tanımla
+
+Part 3 :
+88 -145 arasındaki kod satırları :
+başta @ovveride kullandık çünkü bu kodun güvenirliğini arttırır kullanmasakda olur...
+Scaffold iskele demek artık uygulamanın mantıksal herşeyi bitmiş tasarıma başlanmış anlamına gelir,ve içindde bulunanlar şunlardır :
+1-) Appbar (Üst çubuk) = uygulama adı gibi buton felan eklersin.
+2-) Body(Gövde) = uygulamanın ana içeriğini belirler içinde herşey olur pagelar felan.
+3-) BottomNavigationBar (Alt çubuk) = navigation barlar felan olur.
+4-) FloatingActionButton = Bu, kullanıcının hızlıca bir eylemi gerçekleştirmesini sağlayan bir yüzen düğme olarak kullanılır. Örneğin, yeni bir öğe eklemek veya bir eylem gerçekleştirmek için kullanılabilir.
+5-) Drawer (Çekmece Menüsü): Bu, ekstra navigasyon seçeneklerini veya uygulama ayarlarını içeren bir yan menüdür. Genellikle sola kaydırarak veya belirli bir düğmeye tıklayarak açılır.
+6-) SnackBar: Kısa süreli bilgilendirme veya geri bildirim mesajlarını göstermek için kullanılır. Kullanıcıya bir işlem başarılı bir şekilde gerçekleştiğini veya bir hata meydana geldiğini bildirme amacı taşır.
+const = sabit bir değere sabit demek olmsa yine de çalışırdı fakat kararlılık azalırdı...
+edgeinstest = bulunduğu yerin çevresi yanına all ekleyince de (alt,üst.sağ.sol) tarafındaki tüm boşluklar
+column = dikey demek uygulamamız dikey ekranda olucak yani...
+child = içinde Container, Card, Column, Row, Center, Padding widgetları bulunduran bir widget...
+fontsize = metnin boyutu 
+fontweight = metnin kalınlığı
+MainAxisAlignment = Minumum eksen hizalaması 
+Row içine yazdığın şeyler sağdan sola şekilde eklenir
+MainAxisAlignment.spaceEvenly = minimum eksen hizalamasında eşit boşluk bırak demektir...
+children = Row, Column, ListView, Stack gibi widget'lar, birden çok çocuk widget'ını içerebilir. 
+kıscası part 3 de yaptığımız şunlardır :
+Scaffoldun içine appBar sonra body 
