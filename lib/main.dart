@@ -1,87 +1,48 @@
-import 'dart:html';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 void main() {
-  runApp(CalculatorApp());
+  runApp(MyApp());
 }
 
-class CalculatorApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Calculator(),
+      debugShowCheckedModeBanner: false,
+      home: CalculatorApp(),
     );
   }
 }
 
-class Calculator extends StatefulWidget {
+class CalculatorApp extends StatefulWidget {
   @override
-  _CalculatorState createState() => _CalculatorState();
+  _CalculatorAppState createState() => _CalculatorAppState();
 }
 
-class _CalculatorState extends State<Calculator> {
-  String _display = '';
-  double _num1 = 0;
-  double _num2 = 0;
-  String _operator = '';
+class _CalculatorAppState extends State<CalculatorApp> {
+  String result = '';
+  String input = '';
 
-  void _onButtonPressed(String text) {
-    if (text == 'C') {
-      _clear();
-    } else if (text == '+' || text == '-' || text == '*' || text == '/') {
-      _setOperator(text);
-    } else if (text == '=') {
-      _calculate();
-    } else {
-      _appendToDisplay(text);
-    }
-  }
-
-  void _appendToDisplay(String text) {
+  void _onButtonPressed(String buttonText) {
     setState(() {
-      _display += text;
-    });
-  }
-
-  void _setOperator(String Operator) {
-    setState(() {
-      _operator = Operator;
-      _num1 = double.parse(_display);
-      _display = '';
-    });
-  }
-
-  void _calculate() {
-    double result = 0;
-    double _num2 = double.parse(_display);
-
-    switch (_operator) {
-      case '+':
-        result = _num1 + _num2;
-        break;
-      case '-':
-        result = _num1 - _num2;
-        break;
-      case '*':
-        result = _num1 * _num2;
-        break;
-      case '/':
-        result = _num1 / _num2;
-        break;
-    }
-    setState(() {
-      _display = result.toString();
-    });
-  }
-
-  void _clear() {
-    setState(() {
-      _display = '';
-      _num1 = 0;
-      _num2 = 0;
-      _operator = '';
+      if (buttonText == 'C') {
+        input = '';
+        result = '';
+      } else if (buttonText == '=') {
+        try {
+          Parser p = Parser();
+          Expression exp = p.parse(input);
+          ContextModel cm = ContextModel();
+          result = exp.evaluate(EvaluationType.REAL, cm).toString();
+        } catch (e) {
+          result = 'Error';
+        }
+      } else if (buttonText == 'X') {
+        input += '*';
+      } else {
+        input += buttonText;
+      }
     });
   }
 
@@ -89,77 +50,75 @@ class _CalculatorState extends State<Calculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Yilmaz edis'),
+        title: Text('Hesap Makinesi'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              _display,
-              style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: Text(
+              input,
+              style: TextStyle(fontSize: 24),
             ),
-            SizedBox(height: 20.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CalculatorButton('7', _onButtonPressed),
-                CalculatorButton('8', _onButtonPressed),
-                CalculatorButton('9', _onButtonPressed),
-                CalculatorButton('+', _onButtonPressed),
-              ],
+          ),
+          Container(
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text(
+              result,
+              style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CalculatorButton('4', _onButtonPressed),
-                CalculatorButton('5', _onButtonPressed),
-                CalculatorButton('6', _onButtonPressed),
-                CalculatorButton('-', _onButtonPressed),
-              ],
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: GridView.builder(
+                itemCount: buttons.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                ),
+                itemBuilder: (context, index) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      _onButtonPressed(buttons[index]);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.all(16),
+                    ),
+                    child: Text(
+                      buttons[index],
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  );
+                },
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CalculatorButton('1', _onButtonPressed),
-                CalculatorButton('2', _onButtonPressed),
-                CalculatorButton('3', _onButtonPressed),
-                CalculatorButton('*', _onButtonPressed),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CalculatorButton('C', _onButtonPressed),
-                CalculatorButton('0', _onButtonPressed),
-                CalculatorButton('=', _onButtonPressed),
-                CalculatorButton('/', _onButtonPressed),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CalculatorButton extends StatelessWidget {
-  final String text;
-  final Function(String) onPressed;
-
-  CalculatorButton(this.text, this.onPressed);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        onPressed(text);
-      },
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 24.0),
+          ),
+        ],
       ),
     );
   }
+
+  List<String> buttons = [
+    '7',
+    '8',
+    '9',
+    '/',
+    '4',
+    '5',
+    '6',
+    'X',
+    '1',
+    '2',
+    '3',
+    '-',
+    '0',
+    'C',
+    '=',
+    '+',
+  ];
 }
